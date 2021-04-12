@@ -1,0 +1,24 @@
+{
+  "name": "learn-xlsx",
+  "version": "1.0.0",
+  "description": "学习 xlsx 库",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Haixiang6123/learn-xlsx.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Haixiang6123/learn-xlsx/issues"
+  },
+  "homepage": "https://github.com/Haixiang6123/learn-xlsx#readme",
+  "dependencies": {
+    "filereader": "^0.10.3",
+    "xlsx": "^0.16.9"
+  }
+}
