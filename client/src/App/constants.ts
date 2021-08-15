@@ -33,3 +33,12 @@ export const columns: ColumnsType<RamenReview> = [
     key: 'rating',
   },
 ]
+
+export const keyMaps = {
+  ID: 'id',
+  品牌: 'brand',
+  类型: 'category',
+  风格: 'style',
+  国家: 'country',
+  评分: 'rating',
+}

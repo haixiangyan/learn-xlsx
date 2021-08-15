@@ -2,6 +2,27 @@ import xlsx from 'xlsx';
 import {RcFile} from "antd/es/upload";
 
 /**
+ * 转换 key
+ * @param excelData
+ * @param keysMap
+ */
+export function convertKeys<Raw = any, Target = any>(excelData: Raw[], keysMap: Record<string, string>): Target[] {
+  return excelData.map(excelItem => {
+    return Object.entries(excelItem).reduce((prev: any, curt) => {
+      const [curtKey, curtValue] = curt;
+
+      // 更新 key
+      const mappedKey = keysMap[curtKey];
+      if (mappedKey) {
+        prev[mappedKey] = curtValue;
+      }
+
+      return prev;
+    }, {});
+  })
+}
+
+/**
  * 从 excel 文件读取数据
  * @param excelRcFile excel 文件
  */
