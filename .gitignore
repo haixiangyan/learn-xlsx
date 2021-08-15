@@ -106,3 +106,5 @@ dist
 .idea
 
 package-lock.json
+
+~$ramen-ratings.xlsx
