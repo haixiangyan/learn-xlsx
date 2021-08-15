@@ -1,4 +1,4 @@
-import xlsx from 'xlsx';
+import xlsx, {WorkBook} from 'xlsx';
 import {RcFile} from "antd/es/upload";
 
 /**
@@ -52,4 +52,21 @@ export async function importExcel<Item = any>(excelRcFile: RcFile): Promise<Item
 
     reader.readAsBinaryString(excelRcFile);
   });
+}
+
+/**
+ * 导出 excel 文件
+ * @param array JSON 数组
+ * @param sheetName 第一张表名
+ * @param fileName 文件名
+ */
+export function exportExcel(array: any[], sheetName = '表1', fileName = 'example.xlsx') {
+  const jsonWorkSheet = xlsx.utils.json_to_sheet(array);
+  const workBook: WorkBook = {
+    SheetNames: [sheetName],
+    Sheets: {
+      [sheetName]: jsonWorkSheet,
+    }
+  };
+  xlsx.writeFile(workBook, fileName);
 }
