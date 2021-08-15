@@ -1,11 +1,12 @@
 import {FC, useState} from "react";
 import {Button, Divider, Table, Upload} from "antd";
 import {ExcelRamenReview, RamenReview} from "./types";
-import {columns, keyMaps} from "./constants";
+import {columns, excelMimeType, keyMaps} from "./constants";
 import styles from './styles.module.scss';
 import {UploadRequestOption as RcCustomRequestOptions} from "rc-upload/lib/interface";
 import {convertKeys, exportExcel, importExcel} from "./utils";
 import {RcFile} from "antd/es/upload";
+import {UploadChangeParam} from "antd/lib/upload/interface";
 
 const App: FC = () => {
   const [dataSource, setDataSource] = useState<RamenReview[]>([]);
@@ -30,22 +31,40 @@ const App: FC = () => {
     })));
   }
 
+  const onUploadChange = (info: UploadChangeParam) => {
+    const { status, response } = info.file;
+    if (status === 'done') {
+      setDataSource(response.data);
+    } else if (info.file.status === 'error') {
+      console.error('error', info.file.name);
+    }
+  }
+
   return (
     <div className={styles.app}>
       <h1>xlsx 导入/导出</h1>
 
       <div>
-        <Upload customRequest={customRequest} showUploadList={false}>
+        <Upload accept={excelMimeType} customRequest={customRequest} showUploadList={false}>
           <Button type="primary">Excel导入</Button>
         </Upload>
         <Button
+          style={{ marginLeft: 12, marginRight: 12 }}
           disabled={dataSource.length === 0}
-          style={{ marginLeft: 12 }}
           onClick={batchExport}
           type="primary"
         >
           导出Excel
         </Button>
+        <Upload
+          action="http://localhost:4200/data"
+          name="excel"
+          accept={excelMimeType}
+          onChange={onUploadChange}
+          showUploadList={false}
+        >
+          <Button type="primary">远程获取Excel</Button>
+        </Upload>
       </div>
 
       <Divider />

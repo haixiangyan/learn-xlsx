@@ -42,3 +42,5 @@ export const keyMaps = {
   国家: 'country',
   评分: 'rating',
 }
+
+export const excelMimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
