@@ -46,7 +46,7 @@ const App: FC = () => {
 
       <div>
         <Upload accept={excelMimeType} customRequest={customRequest} showUploadList={false}>
-          <Button type="primary">Excel导入</Button>
+          <Button type="primary">前端导入Excel</Button>
         </Upload>
         <Button
           style={{ marginLeft: 12, marginRight: 12 }}
@@ -54,7 +54,7 @@ const App: FC = () => {
           onClick={batchExport}
           type="primary"
         >
-          导出Excel
+          前端导出Excel
         </Button>
         <Upload
           action="http://localhost:4200/data"
@@ -63,7 +63,7 @@ const App: FC = () => {
           onChange={onUploadChange}
           showUploadList={false}
         >
-          <Button type="primary">远程获取Excel</Button>
+          <Button type="primary" danger>后端解析Excel</Button>
         </Upload>
       </div>
 
