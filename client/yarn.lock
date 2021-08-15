@@ -1871,6 +1871,11 @@
   "resolved" "https://registry.nlark.com/@types/estree/download/@types/estree-0.0.39.tgz"
   "version" "0.0.39"
 
+"@types/file-saver@^2.0.3":
+  "integrity" "sha512-MBIou8pd/41jkff7s97B47bc9+p0BszqqDJsO51yDm49uUxeKzrfuNl5fSLC6BpLEWKA8zlwyqALVmXrFwoBHQ=="
+  "resolved" "https://registry.npmjs.org/@types/file-saver/-/file-saver-2.0.3.tgz"
+  "version" "2.0.3"
+
 "@types/glob@^7.1.1":
   "integrity" "sha1-6lniHS7lxReRTLS8jkFTuZ5WZnI="
   "resolved" "https://registry.nlark.com/@types/glob/download/@types/glob-7.1.4.tgz"
@@ -2841,6 +2846,13 @@
   "integrity" "sha1-/Ph3e4LGLPxpx+nzLA0iJih2gOc="
   "resolved" "https://registry.nlark.com/axe-core/download/axe-core-4.3.2.tgz?cache=0&sync_timestamp=1628698125599&other_urls=https%3A%2F%2Fregistry.nlark.com%2Faxe-core%2Fdownload%2Faxe-core-4.3.2.tgz"
   "version" "4.3.2"
+
+"axios@^0.21.1":
+  "integrity" "sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA=="
+  "resolved" "https://registry.npmjs.org/axios/-/axios-0.21.1.tgz"
+  "version" "0.21.1"
+  dependencies:
+    "follow-redirects" "^1.10.0"
 
 "axobject-query@^2.2.0":
   "integrity" "sha1-lD1H4QwLcEqkInXiDt83ImSJib4="
@@ -5530,6 +5542,11 @@
     "loader-utils" "^2.0.0"
     "schema-utils" "^3.0.0"
 
+"file-saver@^2.0.5":
+  "integrity" "sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA=="
+  "resolved" "https://registry.npmjs.org/file-saver/-/file-saver-2.0.5.tgz"
+  "version" "2.0.5"
+
 "file-uri-to-path@1.0.0":
   "integrity" "sha1-VTp7hEb/b2hDWcRF8eN6BdrMM90="
   "resolved" "https://registry.npm.taobao.org/file-uri-to-path/download/file-uri-to-path-1.0.0.tgz"
@@ -5636,7 +5653,7 @@
     "inherits" "^2.0.3"
     "readable-stream" "^2.3.6"
 
-"follow-redirects@^1.0.0":
+"follow-redirects@^1.0.0", "follow-redirects@^1.10.0":
   "integrity" "sha1-2RFN7Qoc/dM04WTmZirQK/2R/0M="
   "resolved" "https://registry.nlark.com/follow-redirects/download/follow-redirects-1.14.1.tgz?cache=0&sync_timestamp=1620555300559&other_urls=https%3A%2F%2Fregistry.nlark.com%2Ffollow-redirects%2Fdownload%2Ffollow-redirects-1.14.1.tgz"
   "version" "1.14.1"

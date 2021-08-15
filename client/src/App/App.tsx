@@ -7,6 +7,10 @@ import {UploadRequestOption as RcCustomRequestOptions} from "rc-upload/lib/inter
 import {convertKeys, exportExcel, importExcel} from "./utils";
 import {RcFile} from "antd/es/upload";
 import {UploadChangeParam} from "antd/lib/upload/interface";
+import axios from "axios";
+import { saveAs } from 'file-saver';
+
+const http = axios.create({baseURL: 'http://localhost:4200'});
 
 const App: FC = () => {
   const [dataSource, setDataSource] = useState<RamenReview[]>([]);
@@ -40,6 +44,14 @@ const App: FC = () => {
     }
   }
 
+  const convertExcel = async () => {
+    const response = await http.post('/data_to_excel', {
+      data: dataSource,
+    }, { responseType: 'blob' })
+
+    saveAs(response.data, "test.xlsx");
+  }
+
   return (
     <div className={styles.app}>
       <h1>xlsx 导入/导出</h1>
@@ -48,16 +60,21 @@ const App: FC = () => {
         <Upload accept={excelMimeType} customRequest={customRequest} showUploadList={false}>
           <Button type="primary">前端Excel转Data</Button>
         </Upload>
+
+        <Divider type="vertical"/>
+
         <Button
-          style={{ marginLeft: 12, marginRight: 12 }}
           disabled={dataSource.length === 0}
           onClick={batchExport}
           type="primary"
         >
           前端Data转Excel
         </Button>
+
+        <Divider type="vertical"/>
+
         <Upload
-          action="http://localhost:4200/data"
+          action="http://localhost:4200/excel_to_data"
           name="excel"
           accept={excelMimeType}
           onChange={onUploadChange}
@@ -65,6 +82,12 @@ const App: FC = () => {
         >
           <Button type="primary" danger>后端Excel转Data</Button>
         </Upload>
+
+        <Divider type="vertical"/>
+
+        <Button disabled={dataSource.length === 0} type="primary" danger onClick={convertExcel}>
+          后端Data转Excel
+        </Button>
       </div>
 
       <Divider />

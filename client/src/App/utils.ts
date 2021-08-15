@@ -68,5 +68,5 @@ export function exportExcel(array: any[], sheetName = '表1', fileName = 'exampl
       [sheetName]: jsonWorkSheet,
     }
   };
-  xlsx.writeFile(workBook, fileName);
+  return xlsx.writeFile(workBook, fileName);
 }

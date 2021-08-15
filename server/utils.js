@@ -17,6 +17,23 @@ function importExcelFromBuffer(fileBuffer) {
 }
 
 /**
+ * 将数据转成 excel
+ * @param array
+ * @param sheetName
+ * @returns {any}
+ */
+function exportExcelFromData(array, sheetName = '表1') {
+  const jsonWorkSheet = xlsx.utils.json_to_sheet(array);
+  const workBook = {
+    SheetNames: [sheetName],
+    Sheets: {
+      [sheetName]: jsonWorkSheet,
+    }
+  };
+  return xlsx.write(workBook, {type: 'binary'});
+}
+
+/**
  * 转换 key
  * @param excelData
  * @param keysMap
@@ -39,5 +56,6 @@ function convertKeys(excelData, keysMap) {
 
 module.exports = {
   importExcelFromBuffer,
+  exportExcelFromData,
   convertKeys,
 }
