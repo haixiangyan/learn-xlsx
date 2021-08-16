@@ -2,7 +2,6 @@ import {FC, useState} from "react";
 import {Button, Divider, Table} from "antd";
 import {RamenReview} from "./types";
 import {baseURL, columns} from "./constants";
-import styles from './styles.module.scss';
 import {exportExcel} from "./utils";
 import axios from "axios";
 import {saveAs} from 'file-saver';
@@ -36,7 +35,7 @@ const App: FC = () => {
   }
 
   return (
-    <div className={styles.app}>
+    <div style={{ padding: 24 }}>
       <h1>xlsx 导入/导出</h1>
 
       <div>
