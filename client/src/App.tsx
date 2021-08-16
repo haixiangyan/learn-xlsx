@@ -6,12 +6,14 @@ import styles from './styles.module.scss';
 import {exportExcel} from "./utils";
 import axios from "axios";
 import {saveAs} from 'file-saver';
-import LocalExcelImport from "./components/LocalExcelImport";
-import ServerExcelImport from "./components/ServerExcelImport";
+import LocalImportModal from "./components/LocalImportModal";
+import ServerImportModal from "./components/ServerImportModal";
 
 const http = axios.create({baseURL});
 
 const App: FC = () => {
+  const [localModalVisible, setLocalModalVisible] = useState<boolean>(false);
+  const [serverModalVisible, setServerModalVisible] = useState<boolean>(false);
   const [dataSource, setDataSource] = useState<RamenReview[]>([]);
 
   const localDataToExcel = () => {
@@ -38,7 +40,13 @@ const App: FC = () => {
       <h1>xlsx 导入/导出</h1>
 
       <div>
-        <LocalExcelImport onImport={(data: RamenReview[]) => setDataSource(data)}/>
+        <Button type="primary" onClick={() => setLocalModalVisible(true)}>前端Excel转Data</Button>
+        <LocalImportModal
+          title="前端Excel转Data"
+          visible={localModalVisible}
+          onCancel={() => setLocalModalVisible(false)}
+          onSubmit={data => setDataSource(data)}
+        />
 
         <Divider type="vertical"/>
 
@@ -48,7 +56,13 @@ const App: FC = () => {
 
         <Divider type="vertical"/>
 
-        <ServerExcelImport onImport={(data: RamenReview[]) => setDataSource(data)} />
+        <Button type="primary" danger onClick={() => setServerModalVisible(true)}>后端Excel转Data</Button>
+        <ServerImportModal
+          title="后端Excel转Data"
+          visible={serverModalVisible}
+          onCancel={() => setServerModalVisible(false)}
+          onSubmit={data => setDataSource(data)}
+        />
 
         <Divider type="vertical"/>
 
