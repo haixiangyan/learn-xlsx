@@ -1,5 +1,5 @@
 import {ColumnsType} from "antd/es/table";
-import {RamenReview} from "./types";
+import {RamenReview} from "../types";
 
 export const columns: ColumnsType<RamenReview> = [
   {
