@@ -44,3 +44,5 @@ export const keyMaps = {
 }
 
 export const excelMimeType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+
+export const baseURL = 'http://localhost:4200';

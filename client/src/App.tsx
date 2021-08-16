@@ -1,28 +1,18 @@
 import {FC, useState} from "react";
-import {Button, Divider, Table, Upload} from "antd";
-import {ExcelRamenReview, RamenReview} from "./types";
-import {columns, excelMimeType, keyMaps} from "./constants";
+import {Button, Divider, Table} from "antd";
+import {RamenReview} from "./types";
+import {baseURL, columns} from "./constants";
 import styles from './styles.module.scss';
-import {UploadRequestOption as RcCustomRequestOptions} from "rc-upload/lib/interface";
-import {convertKeys, exportExcel, importExcel} from "./utils";
-import {RcFile} from "antd/es/upload";
-import {UploadChangeParam} from "antd/lib/upload/interface";
+import {exportExcel} from "./utils";
 import axios from "axios";
-import { saveAs } from 'file-saver';
+import {saveAs} from 'file-saver';
+import LocalExcelImport from "./components/LocalExcelImport";
+import ServerExcelImport from "./components/ServerExcelImport";
 
-const http = axios.create({baseURL: 'http://localhost:4200'});
+const http = axios.create({baseURL});
 
 const App: FC = () => {
   const [dataSource, setDataSource] = useState<RamenReview[]>([]);
-
-  const localExcelToData = async (options: RcCustomRequestOptions) => {
-    const {file} = options;
-
-    const excelData = await importExcel<ExcelRamenReview>(file as RcFile);
-    const data = convertKeys<ExcelRamenReview, RamenReview>(excelData, keyMaps);
-
-    setDataSource(data);
-  }
 
   const localDataToExcel = () => {
     exportExcel(dataSource.map(item => ({
@@ -33,15 +23,6 @@ const App: FC = () => {
       风格: item.style,
       评分: item.rating,
     })));
-  }
-
-  const serverExcelToData = (info: UploadChangeParam) => {
-    const { status, response } = info.file;
-    if (status === 'done') {
-      setDataSource(response.data);
-    } else if (info.file.status === 'error') {
-      console.error('error', info.file.name);
-    }
   }
 
   const serverDataToExcel = async () => {
@@ -57,31 +38,17 @@ const App: FC = () => {
       <h1>xlsx 导入/导出</h1>
 
       <div>
-        <Upload accept={excelMimeType} customRequest={localExcelToData} showUploadList={false}>
-          <Button type="primary">前端Excel转Data</Button>
-        </Upload>
+        <LocalExcelImport onImport={(data: RamenReview[]) => setDataSource(data)}/>
 
         <Divider type="vertical"/>
 
-        <Button
-          disabled={dataSource.length === 0}
-          onClick={localDataToExcel}
-          type="primary"
-        >
+        <Button disabled={dataSource.length === 0} onClick={localDataToExcel} type="primary">
           前端Data转Excel
         </Button>
 
         <Divider type="vertical"/>
 
-        <Upload
-          action="http://localhost:4200/excel_to_data"
-          name="excel"
-          accept={excelMimeType}
-          onChange={serverExcelToData}
-          showUploadList={false}
-        >
-          <Button type="primary" danger>后端Excel转Data</Button>
-        </Upload>
+        <ServerExcelImport onImport={(data: RamenReview[]) => setDataSource(data)} />
 
         <Divider type="vertical"/>
 
