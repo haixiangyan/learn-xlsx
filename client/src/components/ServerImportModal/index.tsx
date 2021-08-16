@@ -9,6 +9,8 @@ interface Props extends ModalProps {
   onSubmit?: (data: any[]) => void;
 }
 
+const {Dragger} = Upload;
+
 const ServerImportModal: FC<Props> = (props) => {
   const {onImport, onSubmit, onOk, onCancel, ...modalProps} = props;
 
@@ -35,14 +37,14 @@ const ServerImportModal: FC<Props> = (props) => {
 
   return (
     <Modal onOk={innerOnOk} onCancel={onCancel} {...modalProps}>
-      <Upload
+      <Dragger
         action={`${baseURL}/excel_to_data`}
         name="excel"
         accept={excelMimeType}
         onChange={serverExcelToData}
       >
         <Button type="primary" danger>后端Excel转Data</Button>
-      </Upload>
+      </Dragger>
     </Modal>
   )
 }

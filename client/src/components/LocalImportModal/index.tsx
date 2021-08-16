@@ -12,6 +12,8 @@ interface Props extends ModalProps {
   onSubmit?: (data: any[]) => void;
 }
 
+const {Dragger} = Upload;
+
 const LocalImportModal: FC<Props> = (props) => {
   const {onImport, onSubmit, onCancel, onOk, ...modalProps} = props;
 
@@ -45,9 +47,9 @@ const LocalImportModal: FC<Props> = (props) => {
 
   return (
     <Modal onCancel={onCancel} onOk={innerOnOk} {...modalProps}>
-      <Upload accept={excelMimeType} customRequest={localExcelToData}>
+      <Dragger accept={excelMimeType} customRequest={localExcelToData}>
         <Button type="primary">前端Excel转Data</Button>
-      </Upload>
+      </Dragger>
     </Modal>
   )
 }
