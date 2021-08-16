@@ -15,7 +15,7 @@ const http = axios.create({baseURL: 'http://localhost:4200'});
 const App: FC = () => {
   const [dataSource, setDataSource] = useState<RamenReview[]>([]);
 
-  const customRequest = async (options: RcCustomRequestOptions) => {
+  const localExcelToData = async (options: RcCustomRequestOptions) => {
     const {file} = options;
 
     const excelData = await importExcel<ExcelRamenReview>(file as RcFile);
@@ -24,7 +24,7 @@ const App: FC = () => {
     setDataSource(data);
   }
 
-  const batchExport = () => {
+  const localDataToExcel = () => {
     exportExcel(dataSource.map(item => ({
       ID: item.id,
       品牌: item.brand,
@@ -35,7 +35,7 @@ const App: FC = () => {
     })));
   }
 
-  const onUploadChange = (info: UploadChangeParam) => {
+  const serverExcelToData = (info: UploadChangeParam) => {
     const { status, response } = info.file;
     if (status === 'done') {
       setDataSource(response.data);
@@ -44,7 +44,7 @@ const App: FC = () => {
     }
   }
 
-  const convertExcel = async () => {
+  const serverDataToExcel = async () => {
     const response = await http.post('/data_to_excel', {
       data: dataSource,
     }, { responseType: 'blob' })
@@ -57,7 +57,7 @@ const App: FC = () => {
       <h1>xlsx 导入/导出</h1>
 
       <div>
-        <Upload accept={excelMimeType} customRequest={customRequest} showUploadList={false}>
+        <Upload accept={excelMimeType} customRequest={localExcelToData}>
           <Button type="primary">前端Excel转Data</Button>
         </Upload>
 
@@ -65,7 +65,7 @@ const App: FC = () => {
 
         <Button
           disabled={dataSource.length === 0}
-          onClick={batchExport}
+          onClick={localDataToExcel}
           type="primary"
         >
           前端Data转Excel
@@ -77,7 +77,7 @@ const App: FC = () => {
           action="http://localhost:4200/excel_to_data"
           name="excel"
           accept={excelMimeType}
-          onChange={onUploadChange}
+          onChange={serverExcelToData}
           showUploadList={false}
         >
           <Button type="primary" danger>后端Excel转Data</Button>
@@ -85,7 +85,7 @@ const App: FC = () => {
 
         <Divider type="vertical"/>
 
-        <Button disabled={dataSource.length === 0} type="primary" danger onClick={convertExcel}>
+        <Button disabled={dataSource.length === 0} type="primary" danger onClick={serverDataToExcel}>
           后端Data转Excel
         </Button>
       </div>
