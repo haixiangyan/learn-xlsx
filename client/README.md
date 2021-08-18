@@ -30,3 +30,9 @@ npm run test
 * 前端 Data 转 Excel
 * 后端 Excel 转 Data
 * 后端 Data 转 Excel
+
+使用以下命令测试：
+
+```shell
+npm run cypress:open
+```

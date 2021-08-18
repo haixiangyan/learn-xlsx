@@ -18,9 +18,21 @@ npm run start
 * importExcelFromBuffer
 * exportExcelFromData
 
+使用以下命令测试：
+
+```shell
+npm run test
+```
+
 ## e2e测试
 
 使用 [supertest]() 进行集成测试。主要测试：
 
 * /data_to_excel 接口
 * /excel_to_data 接口
+
+使用以下命令测试：
+
+```shell
+npm run test
+```
