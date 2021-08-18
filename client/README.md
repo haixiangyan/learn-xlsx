@@ -1,6 +1,6 @@
 # 前端
 
-使用 [React](https://reactjs.org/) + [Ant Design](https://ant.design/index-cn) 实现前端的 Excel 导入导出 App。
+使用 [React.js](https://reactjs.org/) + [Ant Design](https://ant.design/index-cn) 实现前端的 Excel 导入导出 App。
 
 ## 运行
 
