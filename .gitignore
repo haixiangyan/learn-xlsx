@@ -108,3 +108,4 @@ dist
 package-lock.json
 
 ~$ramen-ratings.xlsx
+~$test.xlsx
