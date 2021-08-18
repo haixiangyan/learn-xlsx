@@ -51,7 +51,12 @@ const App: FC = () => {
 
         <Divider type="vertical"/>
 
-        <Button disabled={dataSource.length === 0} onClick={localDataToExcel} type="primary">
+        <Button
+          data-cy="frontend-data-excel"
+          disabled={dataSource.length === 0}
+          onClick={localDataToExcel}
+          type="primary"
+        >
           前端Data转Excel
         </Button>
 
@@ -69,7 +74,13 @@ const App: FC = () => {
 
         <Divider type="vertical"/>
 
-        <Button disabled={dataSource.length === 0} type="primary" danger onClick={serverDataToExcel}>
+        <Button
+          data-cy="backend-data-excel"
+          disabled={dataSource.length === 0}
+          type="primary"
+          danger
+          onClick={serverDataToExcel}
+        >
           后端Data转Excel
         </Button>
       </div>
