@@ -1,6 +1,8 @@
 import * as path from 'path';
 import {importExcelFromBuffer} from "../../src/utils";
 
+const downloadsFolder = Cypress.config('downloadsFolder')
+
 const uploadInput = '[data-cy="upload-excel-input"]';
 const clipIconClass = '.anticon-paper-clip'
 
@@ -34,7 +36,13 @@ const checkExcelToData = (excelToDataBtn: string) => {
 
 describe('xlsx 导入/导出 App', () => {
   before(() => {
+    // 刚开始进入页面
     cy.visit('http://localhost:3000')
+  })
+
+  afterEach(() => {
+    // 每次跑完都要删掉下载下来的 Excel 文件
+    cy.task('deleteFolder', downloadsFolder);
   })
 
   it('有 4 个按钮', () => {
@@ -53,18 +61,38 @@ describe('xlsx 导入/导出 App', () => {
     cy.get(dataToExcelBtn).click();
     // 等 500ms
     cy.wait(500)
-      .readFile(path.join(__dirname, '../downloads/example.xlsx'), 'utf-8')
+      .readFile(path.join(downloadsFolder, 'example.xlsx'), 'utf-8')
       .then(excelBuffer => {
         const data = importExcelFromBuffer(excelBuffer);
-        console.log(data);
         const [firstRow] = data;
         expect(firstRow).to.equal(firstRow);
       })
   })
 
-  xit('后端 Excel 转 Data', () => {
+  it('后端 Excel 转 Data', () => {
+    // 再次进入页面
+    cy.visit('http://localhost:3000')
     const excelToDataBtn = '[data-cy="backend-excel-data"]';
     checkExcelToData(excelToDataBtn);
+  })
+
+  it('后端 Data 转 Excel', () => {
+    // 监听后端路由
+    cy.server()
+    cy.intercept('/data_to_excel').as('dataToExcel')
+    // 监听按钮是否不为 disabled
+    const dataToExcelBtn = '[data-cy="backend-data-excel"]:not(:disabled)';
+    cy.get(dataToExcelBtn).should('exist');
+    // 开启下载
+    cy.get(dataToExcelBtn).click();
+    // 等 500ms
+    cy.wait('@dataToExcel')
+      .readFile(path.join(downloadsFolder, 'test.xlsx'), 'utf-8')
+      .then(excelBuffer => {
+        const data = importExcelFromBuffer(excelBuffer);
+        const [firstRow] = data;
+        expect(firstRow).to.equal(firstRow);
+      })
   })
 })
 
