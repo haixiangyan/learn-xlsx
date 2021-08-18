@@ -109,3 +109,5 @@ package-lock.json
 
 ~$ramen-ratings.xlsx
 ~$test.xlsx
+
+.DS_Store
