@@ -92,6 +92,7 @@ describe('xlsx 导入/导出 App', () => {
     cy.get(dataToExcelBtn).click();
     // 等 500ms
     cy.wait('@dataToExcel')
+      .wait(100)
       .task('readDataFromExcel', path.join(downloadsFolder, 'test.xlsx'))
       .then((data: any) => {
         const [firstRow] = data;
