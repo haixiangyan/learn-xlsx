@@ -43,7 +43,7 @@ export function importExcelFromBuffer<Item = any>(excelRcFileBuffer: ArrayBuffer
  * @param sheetName 第一张表名
  * @param fileName 文件名
  */
-export function exportExcel(array: any[], sheetName = '表1', fileName = 'example.xlsx') {
+export function exportExcelFile(array: any[], sheetName = '表1', fileName = 'example.xlsx') {
   const jsonWorkSheet = xlsx.utils.json_to_sheet(array);
   const workBook: WorkBook = {
     SheetNames: [sheetName],

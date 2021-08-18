@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import {convertKeys, importExcelFromBuffer} from "./index";
+import {convertKeys, exportExcelFile, importExcelFromBuffer} from "./index";
 
 const excelFilePath = path.join(__dirname, '../../../test.xlsx');
 
@@ -25,7 +25,7 @@ describe('convertKeys', () => {
   })
 })
 
-describe('importExcel', () => {
+describe('importExcelFromBuffer', () => {
   const excelFileBuffer = fs.readFileSync(excelFilePath);
   const data = [{ 姓名: 'Jack', 年龄: 11 }, { 姓名: 'Mary', 年龄: 12 }]
 
@@ -34,5 +34,26 @@ describe('importExcel', () => {
     expect(jsonArray).toEqual(data);
   })
 });
+
+describe('exportExcelFile', () => {
+  const data = [{ 姓名: 'Jack', 年龄: 11 }, { 姓名: 'Mary', 年龄: 12 }]
+  const tempExcelFileName = 'hello.xlsx';
+  // 这里由于 xlsx.writeFile 导出的路径为项目根路径
+  // 所以不能用 __dirname 来指定目录
+  const tempExcelFilePath = `./${tempExcelFileName}`;
+
+  afterEach(() => {
+    if (fs.existsSync(tempExcelFilePath)) {
+      fs.unlinkSync(tempExcelFilePath);
+    }
+  })
+
+  it('正常导出 Excel 文件', () => {
+    exportExcelFile(data, undefined, tempExcelFileName);
+    const excelFileBuffer = fs.readFileSync(tempExcelFilePath);
+    const convertedData = importExcelFromBuffer(excelFileBuffer);
+    expect(convertedData).toEqual(data);
+  })
+})
 
 export default {}

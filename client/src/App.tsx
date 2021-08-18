@@ -2,7 +2,7 @@ import {FC, useState} from "react";
 import {Button, Divider, Table} from "antd";
 import {RamenReview} from "./types";
 import {baseURL, columns} from "./constants";
-import {exportExcel} from "./utils";
+import {exportExcelFile} from "./utils";
 import axios from "axios";
 import {saveAs} from 'file-saver';
 import LocalImportModal from "./components/LocalImportModal";
@@ -16,7 +16,7 @@ const App: FC = () => {
   const [dataSource, setDataSource] = useState<RamenReview[]>([]);
 
   const localDataToExcel = () => {
-    exportExcel(dataSource.map(item => ({
+    exportExcelFile(dataSource.map(item => ({
       ID: item.id,
       品牌: item.brand,
       国家: item.country,
