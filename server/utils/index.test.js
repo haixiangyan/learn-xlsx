@@ -1,8 +1,8 @@
-import path from 'path';
-import fs from 'fs';
-import {convertKeys, exportExcelFile, importExcelFromBuffer} from "./index";
+const path = require("path");
+const fs = require('fs');
+const {importExcelFromBuffer, exportExcelFromData, convertKeys} = require("./index");
 
-const testExcelFilePath = path.join(__dirname, '../../../test.xlsx');
+const testExcelFilePath = path.join(__dirname, '../../test.xlsx');
 
 describe('convertKeys', () => {
   const rawData = [{ name: 'Jack', age: 11 }, { name: 'mama', age: 22 }]
@@ -26,20 +26,17 @@ describe('convertKeys', () => {
 })
 
 describe('importExcelFromBuffer', () => {
-  const excelFileBuffer = fs.readFileSync(testExcelFilePath);
-  const data = [{ 姓名: 'Jack', 年龄: 11 }, { 姓名: 'Mary', 年龄: 12 }]
-
-  it('正常解析 Excel 文件', () => {
-    const jsonArray = importExcelFromBuffer(excelFileBuffer);
-    expect(jsonArray).toEqual(data);
+  it('可以正常导入 Excel 数据', () => {
+    const excelFileBuffer = fs.readFileSync(testExcelFilePath);
+    const expected = [{ 姓名: 'Jack', 年龄: 11 }, { 姓名: 'Mary', 年龄: 12 }]
+    const result = importExcelFromBuffer(excelFileBuffer);
+    expect(result).toEqual(expected);
   })
-});
+})
 
-describe('exportExcelFile', () => {
+describe('exportExcelFromData', () => {
   const data = [{ 姓名: 'Jack', 年龄: 11 }, { 姓名: 'Mary', 年龄: 12 }]
   const tempExcelFileName = 'hello.xlsx';
-  // 这里由于 xlsx.writeFile 导出的路径为项目根路径
-  // 所以不能用 __dirname 来指定目录
   const tempExcelFilePath = `./${tempExcelFileName}`;
 
   afterEach(() => {
@@ -49,11 +46,11 @@ describe('exportExcelFile', () => {
   })
 
   it('正常导出 Excel 文件', () => {
-    exportExcelFile(data, undefined, tempExcelFileName);
+    const excelBuffer = exportExcelFromData(data, undefined, tempExcelFileName);
+    fs.writeFileSync(tempExcelFilePath, new Buffer(excelBuffer, 'binary'));
+
     const excelFileBuffer = fs.readFileSync(tempExcelFilePath);
     const convertedData = importExcelFromBuffer(excelFileBuffer);
     expect(convertedData).toEqual(data);
   })
 })
-
-export default {}

@@ -47,6 +47,8 @@ function convertKeys(excelData, keysMap) {
       const mappedKey = keysMap[curtKey];
       if (mappedKey) {
         prev[mappedKey] = curtValue;
+      } else {
+        prev[curtKey] = curtValue;
       }
 
       return prev;
