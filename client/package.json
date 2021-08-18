@@ -22,9 +22,10 @@
   },
   "scripts": {
     "cypress:open": "cypress open",
-    "start": "NO_BROWSER=none react-scripts start",
+    "cypress:run": "cypress run",
+    "start": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
