@@ -15,6 +15,8 @@ export function convertKeys<Raw = any, Target = any>(excelData: Raw[], keysMap: 
       const mappedKey = keysMap[curtKey];
       if (mappedKey) {
         prev[mappedKey] = curtValue;
+      } else {
+        prev[curtKey] = curtValue;
       }
 
       return prev;
