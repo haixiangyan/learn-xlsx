@@ -37,7 +37,7 @@ describe('importExcelFromBuffer', () => {
 describe('exportExcelFromData', () => {
   const data = [{ 姓名: 'Jack', 年龄: 11 }, { 姓名: 'Mary', 年龄: 12 }]
   const tempExcelFileName = 'hello.xlsx';
-  const tempExcelFilePath = `./${tempExcelFileName}`;
+  const tempExcelFilePath = path.join(__dirname, `./${tempExcelFileName}`);
 
   afterEach(() => {
     if (fs.existsSync(tempExcelFilePath)) {
