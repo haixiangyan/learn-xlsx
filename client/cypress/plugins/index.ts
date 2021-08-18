@@ -14,6 +14,7 @@
 
 import * as fs from "fs";
 import rimraf from 'rimraf';
+import {importExcelFromBuffer} from "../../src/utils";
 
 /**
  * @type {Cypress.PluginConfig}
@@ -29,11 +30,18 @@ async function deleteFile(filePath: string) {
 
 async function deleteFolder(folderPath: string) {
   const folderExist = fs.existsSync(folderPath);
-  console.log(folderExist, folderPath);
   if (folderExist) {
     rimraf.sync(folderPath);
   }
   return folderExist;
+}
+
+async function readDataFromExcel(excelPath: string) {
+  if (fs.existsSync(excelPath)) {
+    const excelFileBuffer = fs.readFileSync(excelPath);
+    return importExcelFromBuffer(excelFileBuffer);
+  }
+  return [];
 }
 
 export default (on: any) => {
@@ -41,6 +49,7 @@ export default (on: any) => {
   // `config` is the resolved Cypress config
   on('task', {
     deleteFile,
-    deleteFolder
+    deleteFolder,
+    readDataFromExcel
   })
 }

@@ -28,7 +28,14 @@ const App: FC = () => {
 
   const serverDataToExcel = async () => {
     const response = await http.post('/data_to_excel', {
-      data: dataSource,
+      data: dataSource.map(item => ({
+        ID: item.id,
+        品牌: item.brand,
+        国家: item.country,
+        类型: item.category,
+        风格: item.style,
+        评分: item.rating,
+      })),
     }, { responseType: 'blob' })
 
     saveAs(response.data, "test.xlsx");

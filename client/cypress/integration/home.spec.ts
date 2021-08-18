@@ -1,12 +1,19 @@
 import * as path from 'path';
-import {importExcelFromBuffer} from "../../src/utils";
 
 const downloadsFolder = Cypress.config('downloadsFolder')
 
 const uploadInput = '[data-cy="upload-excel-input"]';
 const clipIconClass = '.anticon-paper-clip'
 
-const firstExcelRowData = ["2580", "New Touch", "T's Restaurant Tantanmen ", "Cup", "Japan", "3.75"]
+const firstTableRow = ["2580", "New Touch", "T's Restaurant Tantanmen ", "Cup", "Japan", "3.75"]
+const firstExcelRow = {
+  ID: 2580,
+  品牌: "New Touch",
+  国家: "Japan",
+  类型: "T's Restaurant Tantanmen ",
+  评分: 3.75,
+  风格: "Cup"
+}
 
 const checkExcelToData = (excelToDataBtn: string) => {
   const firstRow = '[data-row-key="2580"]'
@@ -30,7 +37,7 @@ const checkExcelToData = (excelToDataBtn: string) => {
       return Cypress.$(el).text()
     })
     // 检查第一行数据是否相等
-    expect(texts.get()).to.deep.equal(firstExcelRowData)
+    expect(texts.get()).to.deep.equal(firstTableRow)
   })
 }
 
@@ -61,11 +68,10 @@ describe('xlsx 导入/导出 App', () => {
     cy.get(dataToExcelBtn).click();
     // 等 500ms
     cy.wait(500)
-      .readFile(path.join(downloadsFolder, 'example.xlsx'), 'utf-8')
-      .then(excelBuffer => {
-        const data = importExcelFromBuffer(excelBuffer);
+      .task('readDataFromExcel', path.join(downloadsFolder, 'example.xlsx'))
+      .then((data: any) => {
         const [firstRow] = data;
-        expect(firstRow).to.equal(firstRow);
+        expect(firstRow).to.deep.equal(firstExcelRow);
       })
   })
 
@@ -87,11 +93,10 @@ describe('xlsx 导入/导出 App', () => {
     cy.get(dataToExcelBtn).click();
     // 等 500ms
     cy.wait('@dataToExcel')
-      .readFile(path.join(downloadsFolder, 'test.xlsx'), 'utf-8')
-      .then(excelBuffer => {
-        const data = importExcelFromBuffer(excelBuffer);
+      .task('readDataFromExcel', path.join(downloadsFolder, 'test.xlsx'))
+      .then((data: any) => {
         const [firstRow] = data;
-        expect(firstRow).to.equal(firstRow);
+        expect(firstRow).to.deep.equal(firstExcelRow);
       })
   })
 })
