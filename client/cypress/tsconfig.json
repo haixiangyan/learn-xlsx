@@ -19,7 +19,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["jest"]
+    "types": ["cypress", "cypress-file-upload"]
   },
-  "include": ["src"]
+  "include": ["**/*.ts"]
 }

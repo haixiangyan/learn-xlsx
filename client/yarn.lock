@@ -1799,9 +1799,9 @@
     "lz-string" "^1.4.4"
     "pretty-format" "^26.6.2"
 
-"@testing-library/jest-dom@^5.11.4":
-  "integrity" "sha1-hQHhbx5VpV1nX+c+7O4yza3bl2Y="
-  "resolved" "https://registry.nlark.com/@testing-library/jest-dom/download/@testing-library/jest-dom-5.14.1.tgz?cache=0&sync_timestamp=1623430092237&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40testing-library%2Fjest-dom%2Fdownload%2F%40testing-library%2Fjest-dom-5.14.1.tgz"
+"@testing-library/jest-dom@^5.14.1":
+  "integrity" "sha512-dfB7HVIgTNCxH22M1+KU6viG5of2ldoA5ly8Ar8xkezKHKXjRvznCdbMbqjYGgO2xjRbwnR+rR8MLUIqF3kKbQ=="
+  "resolved" "https://registry.npmjs.org/@testing-library/jest-dom/-/jest-dom-5.14.1.tgz"
   "version" "5.14.1"
   dependencies:
     "@babel/runtime" "^7.9.2"

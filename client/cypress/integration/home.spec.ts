@@ -31,3 +31,5 @@ describe('xlsx 导入/导出 App', () => {
     })
   })
 })
+
+export default {}
