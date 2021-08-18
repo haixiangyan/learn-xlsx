@@ -22,7 +22,7 @@
   },
   "scripts": {
     "cypress:open": "cypress open",
-    "start": "react-scripts start",
+    "start": "NO_BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
