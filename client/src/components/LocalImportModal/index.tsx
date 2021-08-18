@@ -47,7 +47,7 @@ const LocalImportModal: FC<Props> = (props) => {
 
   return (
     <Modal onCancel={onCancel} onOk={innerOnOk} {...modalProps}>
-      <Dragger accept={excelMimeType} customRequest={localExcelToData}>
+      <Dragger data-cy="upload-excel-input" accept={excelMimeType} customRequest={localExcelToData}>
         <Button type="primary">前端Excel转Data</Button>
       </Dragger>
     </Modal>

@@ -39,7 +39,9 @@ const App: FC = () => {
       <h1>xlsx 导入/导出</h1>
 
       <div>
-        <Button type="primary" onClick={() => setLocalModalVisible(true)}>前端Excel转Data</Button>
+        <Button data-cy="frontend-excel-data" type="primary" onClick={() => setLocalModalVisible(true)}>
+          前端Excel转Data
+        </Button>
         <LocalImportModal
           title="前端Excel转Data"
           visible={localModalVisible}
