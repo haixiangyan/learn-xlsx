@@ -57,7 +57,9 @@ const App: FC = () => {
 
         <Divider type="vertical"/>
 
-        <Button type="primary" danger onClick={() => setServerModalVisible(true)}>后端Excel转Data</Button>
+        <Button data-cy="backend-excel-data" type="primary" danger onClick={() => setServerModalVisible(true)}>
+          后端Excel转Data
+        </Button>
         <ServerImportModal
           title="后端Excel转Data"
           visible={serverModalVisible}

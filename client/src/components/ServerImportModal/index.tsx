@@ -38,6 +38,7 @@ const ServerImportModal: FC<Props> = (props) => {
   return (
     <Modal onOk={innerOnOk} onCancel={onCancel} {...modalProps}>
       <Dragger
+        data-cy="upload-excel-input"
         action={`${baseURL}/excel_to_data`}
         name="excel"
         accept={excelMimeType}

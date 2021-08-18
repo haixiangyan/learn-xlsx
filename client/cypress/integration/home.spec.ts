@@ -1,5 +1,29 @@
 const uploadInput = '[data-cy="upload-excel-input"]';
 
+const clipIconClass = '.anticon-paper-clip'
+
+const checkExcelToData = (excelToDataBtn: string) => {
+  const firstRow = '[data-row-key="2580"]'
+
+  cy.get(excelToDataBtn).should('exist');
+  cy.get(excelToDataBtn).click()
+  cy.get(uploadInput).attachFile('ramen-ratings.xlsx')
+  cy.get(clipIconClass).should('exist')
+  cy.contains('确 定').click()
+  // 查看表格第一行
+  cy.get(firstRow).should('exist');
+  cy.get(firstRow).find('.ant-table-cell').should($cell => {
+    // 6 列数据
+    expect($cell).to.have.length(6)
+    // 数据内容
+    const texts = $cell.map((i, el) => {
+      return Cypress.$(el).text()
+    })
+    // 检查第一行数据是否相等
+    expect(texts.get()).to.deep.equal(["2580", "New Touch", "T's Restaurant Tantanmen ", "Cup", "Japan", "3.75"])
+  })
+}
+
 describe('xlsx 导入/导出 App', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000')
@@ -11,24 +35,12 @@ describe('xlsx 导入/导出 App', () => {
 
   it('前端 Excel 转 Data', () => {
     const excelToDataBtn = '[data-cy="frontend-excel-data"]';
-    const firstRow = '[data-row-key="2580"]'
+    checkExcelToData(excelToDataBtn);
+  })
 
-    cy.get(excelToDataBtn).should('exist');
-    cy.get(excelToDataBtn).click()
-    cy.get(uploadInput).attachFile('ramen-ratings.xlsx')
-    cy.contains('确 定').click()
-    // 查看表格第一行
-    cy.get(firstRow).should('exist');
-    cy.get(firstRow).find('.ant-table-cell').should($cell => {
-      // 6 列数据
-      expect($cell).to.have.length(6)
-      // 数据内容
-      const texts = $cell.map((i, el) => {
-        return Cypress.$(el).text()
-      })
-      // 检查第一行数据是否相等
-      expect(texts.get()).to.deep.equal(["2580", "New Touch", "T's Restaurant Tantanmen ", "Cup", "Japan", "3.75"])
-    })
+  it('后端 Excel 转 Data', () => {
+    const excelToDataBtn = '[data-cy="backend-excel-data"]';
+    checkExcelToData(excelToDataBtn);
   })
 })
 
