@@ -84,7 +84,6 @@ describe('xlsx 导入/导出 App', () => {
 
   it('后端 Data 转 Excel', () => {
     // 监听后端路由
-    cy.server()
     cy.intercept('/data_to_excel').as('dataToExcel')
     // 监听按钮是否不为 disabled
     const dataToExcelBtn = '[data-cy="backend-data-excel"]:not(:disabled)';
