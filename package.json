@@ -11,7 +11,8 @@
     "client:test": "cd client && yarn test",
     "server:test": "cd server && yarn test",
     "start": "npm-run-all --parallel client:start server:start",
-    "test": "npm-run-all --parallel start client:test server:test"
+    "test": "npm-run-all --parallel start client:test server:test",
+    "coveralls": "cd server && yarn coveralls"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5"
