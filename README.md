@@ -1,5 +1,7 @@
 # learn-xlsx
 
+[![learn-xlsx](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/ixtpfx&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/ixtpfx/runs)
+
 学习 xlsx 库的项目。
 
 ## 技术栈
