@@ -18,8 +18,8 @@
 
 ## 项目说明书
 
-* [前端说明书](./client/README.md)
-* [后端说明书](./server/README.md)
+* [前端说明书](./client)
+* [后端说明书](./server)
 
 
 ## 前言
