@@ -15,6 +15,7 @@
     "coveralls": "cd server && yarn coveralls"
   },
   "devDependencies": {
+    "coveralls": "^3.1.1",
     "npm-run-all": "^4.1.5"
   }
 }
