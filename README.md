@@ -4,7 +4,7 @@
 [![travis](https://www.travis-ci.com/Haixiang6123/learn-xlsx.svg?branch=main)](https://www.travis-ci.com/Haixiang6123/learn-xlsx)
 [![coveralls](https://coveralls.io/repos/github/haixiangyan/learn-xlsx/badge.svg?branch=main)](https://coveralls.io/github/haixiangyan/learn-xlsx?branch=main)
 
-学习 xlsx 库的项目。
+使用 [xlsx](https://www.npmjs.com/package/xlsx) 实现 Excel 导入导出。
 
 ## 技术栈
 
