@@ -1,0 +1,9 @@
+# client
+cd client
+yarn install
+yarn test
+# server
+cd -
+cd server
+yarn install
+yarn test

@@ -5,15 +5,7 @@ cache:
   yarn: true
 jobs:
   include:
-    - stage: client # client
-    - script: cd client
-    - script: yarn install
-    - script: cd -
-    - stage: server # server
-    - script: cd server
-    - script: yarn install
-    - stage: test # test
-    - script: cd -
-    - script: yarn test
+    - stage: test
+    - script: ./test.sh
 after_success:
   - yarn run coveralls
