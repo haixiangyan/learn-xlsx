@@ -1,6 +1,8 @@
 # learn-xlsx
 
-[![learn-xlsx](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/ixtpfx&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/ixtpfx/runs)
+[![cypress](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/ixtpfx&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/ixtpfx/runs)
+[![travis](https://www.travis-ci.com/Haixiang6123/learn-xlsx.svg?branch=main)](https://www.travis-ci.com/Haixiang6123/learn-xlsx)
+[![coveralls](https://coveralls.io/repos/github/haixiangyan/learn-xlsx/badge.svg?branch=main)](https://coveralls.io/github/haixiangyan/learn-xlsx?branch=main)
 
 学习 xlsx 库的项目。
 
