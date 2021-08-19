@@ -19,6 +19,7 @@
 * [前端说明书](./client/README.md)
 * [后端说明书](./server/README.md)
 
+
 ## 前言
 
 如果你和我一样经常和管理页面打交道，那么 **Excel导入数据** 和 **数据导出Excel** 这两个需求一定是逃不掉的。
@@ -214,7 +215,7 @@ function importExcelFromBuffer(fileBuffer) {
 }
 ```
 
-理来实现个路由：
+再来实现个路由：
 
 ```js
 var express = require('express');
@@ -445,7 +446,7 @@ const data = convertKeys<ExcelRamenReview, RamenReview>(excelData, keyMaps)
 
 * Workbook 就是 Excel 文档，一个 Workbook 下有多个 Sheet，一般来说只操作第一个 Sheet
 * `xlsx` 这个库只需要关注 `writeFile`, `readFile`, `write`, `sheet_to_json` 和 `json_to_sheet` 就够用了
-* **直接下载功能** 可以用 `file-saver` 一步到位，也可以使用添加临时 `<a>` 标签来模拟下载行为。但由于到处 Excel 时是返回临时文件的二进制，所以，用 `file-saver` 会比较方便
+* **直接下载功能** 可以用 `file-saver` 一步到位，也可以使用添加临时 `<a>` 标签来模拟下载行为。但由于在接住 Excel 的时候，返回的是临时文件的二进制，所以，用 `file-saver` 会比较方便
 * 前端要接住二进制的文件，需要在 `axios` 的 `responseType` 设置为 `blob`
 * Ant Design 的 Upload 组件非常强大，要善用其给的 `props`，比如 `accept`, `action`, `name`, `customRequest` 等，比如前端解析就是用 `customRequest` “假上传” 来获取 Excel 文件
 
@@ -454,4 +455,3 @@ const data = convertKeys<ExcelRamenReview, RamenReview>(excelData, keyMaps)
 上面也仅实现了 **一个 Sheet** 的情况，对于多个 Sheet 的情况，大家做个 For 循环就可以了。一般来说管理后面的 Excel 导入也没多少花里胡哨的操作，上面这 4 种情况基本能包含 90% 的应用场景了。
 
 我把上面这 4 种场景的实现都放在 [Github 的 learn-xlsx](https://github.com/haixiangyan/learn-xlsx) 上了。除此之外，我还用 [Jest](https://jestjs.io/) 写了 **单元测试**，用 [Cypress](https://www.cypress.io/) 和 [supertest](https://www.npmjs.com/package/supertest) 做 **e2e 测试**，感兴趣的可以 clone 下来直接白嫖哦~
-
