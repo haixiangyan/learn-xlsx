@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require('fs');
 
 const app = require('../app');
-const {importExcelFromBuffer} = require("../utils");
+const {getJsonFromExcel} = require("../utils");
 
 const testExcelFilePath = path.join(__dirname, '../../test.xlsx')
 const testData = [{ 姓名: 'Jack', 年龄: 11 }, { 姓名: 'Mary', 年龄: 12 }]
@@ -39,7 +39,7 @@ describe('/data_to_excel', () => {
         fs.writeFileSync(tempExcelFilePath, new Buffer(res.body, 'binary'));
 
         const excelFileBuffer = fs.readFileSync(tempExcelFilePath);
-        const convertedData = importExcelFromBuffer(excelFileBuffer);
+        const convertedData = getJsonFromExcel(excelFileBuffer);
         expect(convertedData).toEqual(data);
       })
       .end(done);
