@@ -2,7 +2,7 @@ import {FC, useState} from "react";
 import {Button, Modal, ModalProps, Upload} from "antd";
 import {excelMimeType, keyMaps} from "../../constants";
 import {UploadRequestOption as RcCustomRequestOptions} from "rc-upload/lib/interface";
-import {convertKeys, importExcelFromBuffer} from "../../utils";
+import {convertKeys, getJsonFromExcel} from "../../utils";
 import {ExcelRamenReview, RamenReview} from "../../types";
 import {RcFile} from "antd/es/upload";
 import * as React from "react";
@@ -25,7 +25,7 @@ const LocalImportModal: FC<Props> = (props) => {
 
     try {
       // xlsx 导入 excel
-      const excelData = importExcelFromBuffer<ExcelRamenReview>(await (file as RcFile).arrayBuffer());
+      const excelData = getJsonFromExcel<ExcelRamenReview>(await (file as RcFile).arrayBuffer());
       // 转换 key
       const data = convertKeys<ExcelRamenReview, RamenReview>(excelData, keyMaps);
       // 设置 data

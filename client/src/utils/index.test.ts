@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import {convertKeys, exportExcelFile, importExcelFromBuffer} from "./index";
+import {convertKeys, getExcelFromJson, getJsonFromExcel} from "./index";
 
 const testExcelFilePath = path.join(__dirname, '../../../test.xlsx');
 
@@ -25,17 +25,17 @@ describe('convertKeys', () => {
   })
 })
 
-describe('importExcelFromBuffer', () => {
+describe('getJsonFromExcel', () => {
   const excelFileBuffer = fs.readFileSync(testExcelFilePath);
   const data = [{ 姓名: 'Jack', 年龄: 11 }, { 姓名: 'Mary', 年龄: 12 }]
 
   it('正常解析 Excel 文件', () => {
-    const jsonArray = importExcelFromBuffer(excelFileBuffer);
+    const jsonArray = getJsonFromExcel(excelFileBuffer);
     expect(jsonArray).toEqual(data);
   })
 });
 
-describe('exportExcelFile', () => {
+describe('getExcelFromJson', () => {
   const data = [{ 姓名: 'Jack', 年龄: 11 }, { 姓名: 'Mary', 年龄: 12 }]
   const tempExcelFileName = 'hello.xlsx';
   // 这里由于 xlsx.writeFile 导出的路径为项目根路径
@@ -49,9 +49,9 @@ describe('exportExcelFile', () => {
   })
 
   it('正常导出 Excel 文件', () => {
-    exportExcelFile(data, undefined, tempExcelFileName);
+    getExcelFromJson(data, undefined, tempExcelFileName);
     const excelFileBuffer = fs.readFileSync(tempExcelFilePath);
-    const convertedData = importExcelFromBuffer(excelFileBuffer);
+    const convertedData = getJsonFromExcel(excelFileBuffer);
     expect(convertedData).toEqual(data);
   })
 })

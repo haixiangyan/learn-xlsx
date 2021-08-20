@@ -27,7 +27,7 @@ export function convertKeys<Raw = any, Target = any>(excelData: Raw[], keysMap: 
  * 从 excel 文件读取数据
  * @param excelRcFileBuffer excel 文件
  */
-export function importExcelFromBuffer<Item = any>(excelRcFileBuffer: ArrayBuffer): Item[] {
+export function getJsonFromExcel<Item = any>(excelRcFileBuffer: ArrayBuffer): Item[] {
   // 读取表格对象
   const workbook = xlsx.read(excelRcFileBuffer, {type: 'buffer'});
   // 找到第一张表
@@ -43,7 +43,7 @@ export function importExcelFromBuffer<Item = any>(excelRcFileBuffer: ArrayBuffer
  * @param sheetName 第一张表名
  * @param fileName 文件名
  */
-export function exportExcelFile(array: any[], sheetName = '表1', fileName = 'example.xlsx') {
+export function getExcelFromJson(array: any[], sheetName = '表1', fileName = 'example.xlsx'): void {
   const jsonWorkSheet = xlsx.utils.json_to_sheet(array);
   const workBook: WorkBook = {
     SheetNames: [sheetName],

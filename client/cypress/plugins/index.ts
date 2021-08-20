@@ -14,7 +14,7 @@
 
 import * as fs from "fs";
 import rimraf from 'rimraf';
-import {importExcelFromBuffer} from "../../src/utils";
+import {getJsonFromExcel} from "../../src/utils";
 
 /**
  * @type {Cypress.PluginConfig}
@@ -39,7 +39,7 @@ async function deleteFolder(folderPath: string) {
 async function readDataFromExcel(excelPath: string) {
   if (fs.existsSync(excelPath)) {
     const excelFileBuffer = fs.readFileSync(excelPath);
-    return importExcelFromBuffer(excelFileBuffer);
+    return getJsonFromExcel(excelFileBuffer);
   }
   return [];
 }
