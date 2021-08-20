@@ -5,7 +5,7 @@ const xlsx = require('xlsx')
  * @param fileBuffer
  * @returns {unknown[]}
  */
-function importExcelFromBuffer(fileBuffer) {
+function getJsonFromExcel(fileBuffer) {
   // 获取 workbook
   const workbook = xlsx.read(fileBuffer, { type: 'buffer' });
   // 获取第一张表名
@@ -22,7 +22,7 @@ function importExcelFromBuffer(fileBuffer) {
  * @param sheetName
  * @returns {any}
  */
-function exportExcelFromData(array, sheetName = '表1') {
+function getExcelFromJson(array, sheetName = '表1') {
   const jsonWorkSheet = xlsx.utils.json_to_sheet(array);
   const workBook = {
     SheetNames: [sheetName],
@@ -57,7 +57,7 @@ function convertKeys(excelData, keysMap) {
 }
 
 module.exports = {
-  importExcelFromBuffer,
-  exportExcelFromData,
+  getJsonFromExcel,
+  getExcelFromJson,
   convertKeys,
 }

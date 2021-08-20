@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require('fs');
-const {importExcelFromBuffer, exportExcelFromData, convertKeys} = require("./index");
+const {getJsonFromExcel, getExcelFromJson, convertKeys} = require("./index");
 
 const testExcelFilePath = path.join(__dirname, '../../test.xlsx');
 
@@ -25,16 +25,16 @@ describe('convertKeys', () => {
   })
 })
 
-describe('importExcelFromBuffer', () => {
+describe('getJsonFromExcel', () => {
   it('可以正常导入 Excel 数据', () => {
     const excelFileBuffer = fs.readFileSync(testExcelFilePath);
     const expected = [{ 姓名: 'Jack', 年龄: 11 }, { 姓名: 'Mary', 年龄: 12 }]
-    const result = importExcelFromBuffer(excelFileBuffer);
+    const result = getJsonFromExcel(excelFileBuffer);
     expect(result).toEqual(expected);
   })
 })
 
-describe('exportExcelFromData', () => {
+describe('getExcelFromJson', () => {
   const data = [{ 姓名: 'Jack', 年龄: 11 }, { 姓名: 'Mary', 年龄: 12 }]
   const tempExcelFileName = 'hello.xlsx';
   const tempExcelFilePath = path.join(__dirname, `./${tempExcelFileName}`);
@@ -46,11 +46,11 @@ describe('exportExcelFromData', () => {
   })
 
   it('正常导出 Excel 文件', () => {
-    const excelBuffer = exportExcelFromData(data, undefined, tempExcelFileName);
+    const excelBuffer = getExcelFromJson(data, undefined, tempExcelFileName);
     fs.writeFileSync(tempExcelFilePath, new Buffer(excelBuffer, 'binary'));
 
     const excelFileBuffer = fs.readFileSync(tempExcelFilePath);
-    const convertedData = importExcelFromBuffer(excelFileBuffer);
+    const convertedData = getJsonFromExcel(excelFileBuffer);
     expect(convertedData).toEqual(data);
   })
 })
