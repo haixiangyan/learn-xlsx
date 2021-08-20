@@ -28,7 +28,7 @@ router.post('/data_to_excel', (req, res) => {
 
   const binaryContent = getExcelFromJson(data, '表1');
 
-  res.writeHead(200, [['Content-Type', excelMimeType]]);
+  res.writeHead(200, { 'Content-Type': excelMimeType });
   res.end(new Buffer(binaryContent, 'binary'));
 })
 
