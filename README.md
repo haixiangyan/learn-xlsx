@@ -2,8 +2,6 @@
 
 [![cypress](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/ixtpfx&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/ixtpfx/runs)
 [![travis](https://www.travis-ci.com/haixiangyan/learn-xlsx.svg?branch=main)](https://www.travis-ci.com/haixiangyan/learn-xlsx)
-[![coveralls](https://coveralls.io/repos/github/
-yan/learn-xlsx/badge.svg?branch=main)](https://coveralls.io/github/haixiangyan/learn-xlsx?branch=main)
 
 使用 [xlsx](https://www.npmjs.com/package/xlsx) 实现 Excel 导入导出。
 
